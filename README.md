@@ -693,7 +693,7 @@ Issues, feature requests, and pull requests are welcome.
 
 
 ```markdown
-![SysChime Main Window](assets/screenshots/main-window.png)
+![SysChime Main Window](./assets/screenshots/main-window.png)
 ```
 
 
