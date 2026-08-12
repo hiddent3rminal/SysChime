@@ -126,3 +126,47 @@ class MainWindow(QMainWindow):
             "Success",
             "Shutdown melody has been set successfully."
         )
+
+    def remove_both(self):
+        startup_file = (
+            Path.home()
+            / ".config"
+            / "autostart"
+            / "syschime.desktop"
+        )
+
+        remove_script = (
+            Path(__file__).parent
+            / "remove_syschime.sh"
+        )
+
+        try:
+            # Remove startup configuration
+            if startup_file.exists():
+                startup_file.unlink()
+
+            # Remove shutdown configuration
+            subprocess.run(
+                [
+                    "pkexec",
+                    str(remove_script),
+                    str(Path.home())
+                ],
+                check=True
+            )
+
+        except subprocess.CalledProcessError:
+            QMessageBox.warning(
+                self,
+                "Error",
+                "Failed to remove SysChime configuration."
+            )
+            return
+
+        self.selected_melody = None
+
+        QMessageBox.information(
+            self,
+            "Success",
+            "Startup and shutdown melodies have been removed."
+        )
