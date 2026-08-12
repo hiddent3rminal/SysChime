@@ -690,27 +690,12 @@ Issues, feature requests, and pull requests are welcome.
 
 ## 📸 Screenshots
 
-Add your screenshots here:
+
 
 ```markdown
 ![SysChime Main Window](assets/screenshots/main-window.png)
 ```
 
-For example:
-
-### Main Window
-
-![Main Window](assets/screenshots/main-window.png)
-
-### Melody Selection
-
-![Melody Selection](assets/screenshots/melody-selection.png)
-
-### Settings
-
-![Settings](assets/screenshots/settings.png)
-
----
 
 ## 📄 License
 
