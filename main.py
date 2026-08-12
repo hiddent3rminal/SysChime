@@ -61,3 +61,68 @@ class MainWindow(QMainWindow):
             "Success",
             "Startup melody has been set successfully."
         )
+
+
+    def set_shutdown(self):
+        if self.selected_melody is None:
+            QMessageBox.warning(
+                self,
+                "No Melody Selected",
+                "Please Select A Melody First"
+            )
+            return
+
+        melody = (
+            Path(__file__).parent
+            / "melodies"
+            / self.selected_melody
+        ).resolve()
+
+        template_path = (
+            Path(__file__).parent
+            / "shutdown_template.service"
+        )
+
+        template = template_path.read_text(encoding="utf-8")
+
+        template = template.replace(
+            "{MELODY_PATH}",
+            str(melody)
+        )
+
+        # فایل موقت service
+        service_file = Path("/tmp/syschime-shutdown.service")
+
+        service_file.write_text(
+            template,
+            encoding="utf-8"
+        )
+
+        installer = (
+            Path(__file__).parent
+            / "install_shutdown.sh"
+        )
+
+        try:
+            subprocess.run(
+                [
+                    "pkexec",
+                    str(installer),
+                    str(service_file)
+                ],
+                check=True
+            )
+
+        except subprocess.CalledProcessError:
+            QMessageBox.warning(
+                self,
+                "Error",
+                "Failed to configure shutdown melody."
+            )
+            return
+
+        QMessageBox.information(
+            self,
+            "Success",
+            "Shutdown melody has been set successfully."
+        )
