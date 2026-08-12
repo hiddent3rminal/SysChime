@@ -1,0 +1,12 @@
+[Unit]
+Description=SysChime Shutdown Melody
+DefaultDependencies=no
+Before=shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash "{MELODY_PATH}"
+TimeoutStartSec=30
+
+[Install]
+WantedBy=shutdown.target reboot.target halt.target
