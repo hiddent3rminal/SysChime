@@ -170,3 +170,47 @@ class MainWindow(QMainWindow):
             "Success",
             "Startup and shutdown melodies have been removed."
         )
+
+    def preview(self):
+        if self.selected_melody is None:
+            QMessageBox.warning(self, "Error", "Please Select A Melody First.")
+            return
+        melody = Path(__file__).parent / "melodies" / self.selected_melody
+        subprocess.run(["bash", str(melody)])
+
+    def selected_sound(self, item):
+        self.selected_melody = item.data(Qt.UserRole)
+        print(self.selected_melody)
+
+    def setup_melodies(self):
+
+        self.ui.listWidget.item(0).setData(Qt.UserRole, "Off1.sh")
+        self.ui.listWidget.item(1).setData(Qt.UserRole, "Off2.sh")
+        self.ui.listWidget.item(2).setData(Qt.UserRole, "Off3.sh")
+        self.ui.listWidget.item(3).setData(Qt.UserRole, "Off4.sh")
+        self.ui.listWidget.item(4).setData(Qt.UserRole, "Off5.sh")
+        self.ui.listWidget.item(5).setData(Qt.UserRole, "Off6.sh")
+        self.ui.listWidget.item(6).setData(Qt.UserRole, "Off7.sh")
+        self.ui.listWidget.item(7).setData(Qt.UserRole, "Off8.sh")
+        self.ui.listWidget.item(8).setData(Qt.UserRole, "Off9.sh")
+        self.ui.listWidget.item(9).setData(Qt.UserRole, "Off10.sh")
+        self.ui.listWidget.item(10).setData(Qt.UserRole, "Off11.sh")
+        self.ui.listWidget.item(11).setData(Qt.UserRole, "Off12.sh")
+        self.ui.listWidget.item(12).setData(Qt.UserRole, "Off13.sh")
+        self.ui.listWidget.item(13).setData(Qt.UserRole, "On1.sh")        
+        self.ui.listWidget.item(14).setData(Qt.UserRole, "On2.sh")
+        self.ui.listWidget.item(15).setData(Qt.UserRole, "On3.sh")
+        self.ui.listWidget.item(16).setData(Qt.UserRole, "On4.sh")
+        self.ui.listWidget.item(17).setData(Qt.UserRole, "On5.sh")
+        self.ui.listWidget.item(18).setData(Qt.UserRole, "On6.sh")
+        self.ui.listWidget.item(19).setData(Qt.UserRole, "On7.sh")
+        self.ui.listWidget.item(20).setData(Qt.UserRole, "On8.sh")
+        self.ui.listWidget.item(21).setData(Qt.UserRole, "On9.sh")
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+
+    window = MainWindow()
+    window.show()
+
+    sys.exit(app.exec())
